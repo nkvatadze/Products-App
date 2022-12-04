@@ -14,6 +14,12 @@ const Header = () => {
           <li className="cursor-pointer hover:underline">
             <Link to="/customers">Customers</Link>
           </li>
+          <li className="cursor-pointer hover:underline">
+            <Link to="/orders">Orders</Link>
+          </li>
+          <li className="cursor-pointer hover:underline">
+            <Link to="/reports">Reports</Link>
+          </li>
         </ul>
       </div>
     </div>

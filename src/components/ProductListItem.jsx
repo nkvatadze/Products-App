@@ -13,7 +13,9 @@ const ProductItem = ({ product }) => {
         <Link className="cursor-pointer mr-2 hover:bg-gray-600 bg-gray-500 rounded-md px-3 py-2 transition ease-in-out delay-50" to={`products/${product.id}/edit`}>
           Edit
         </Link>
-        <button className="cursor-pointer bg-red-600 hover:bg-red-700 rounded-md px-3 py-1.5 transition ease-in-out delay-50">Delete</button>
+        <Link to={`products/${product.id}/delete`} className="cursor-pointer bg-red-600 hover:bg-red-700 rounded-md px-3 py-1.5 transition ease-in-out delay-50">
+          Delete
+        </Link>
       </div>
     </div>
   );
