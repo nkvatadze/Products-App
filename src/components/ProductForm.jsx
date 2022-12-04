@@ -1,13 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { get, set } from "../utils/localStorage";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { get, getById, set } from "../utils/localStorage";
 import ProductInput from "./ProductInput";
 import { v4 as uuidv4 } from "uuid";
 
-const ProductForm = ({ product = null }) => {
+const ProductForm = () => {
   const navigate = useNavigate();
-
+  const { id } = useParams();
+  const product = getById("products", id);
   const {
     register,
     handleSubmit,
@@ -28,9 +29,15 @@ const ProductForm = ({ product = null }) => {
   const onSubmit = (data) => {
     data.id = uuidv4();
     data.modified_date = new Date();
-    const newProducts = get("products") ?? [];
-    console.log(newProducts);
+    let newProducts = get("products") ?? [];
+
+    if (product) {
+      // Update action
+      newProducts = newProducts.filter((p) => p.id !== product.id);
+    }
+
     newProducts.push(data);
+
     set("products", newProducts);
     navigate("/");
   };
