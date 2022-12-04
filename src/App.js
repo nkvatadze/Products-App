@@ -4,6 +4,7 @@ import Products from "./components/Products";
 import ProductForm from "./components/ProductForm";
 import ComingSoon from "./components/ComingSoon";
 import ProductDelete from "./components/ProductDelete";
+import Page404 from "./components/ErrorPages/Page404";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/customers" element={<ComingSoon />} />
         <Route path="/orders" element={<ComingSoon />} />
         <Route path="/reports" element={<ComingSoon />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </div>
   );

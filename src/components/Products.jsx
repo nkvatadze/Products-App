@@ -25,9 +25,9 @@ const Products = () => {
 
   const handleFilter = (e) => {
     e.preventDefault();
-    let newProducts = [...products];
+    let newProducts = get("products") ?? [];
     if (search) {
-      newProducts = newProducts.filter((p) => p.product_name.toLowerCase().includes(search.toLowerCase()));
+      newProducts = newProducts.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
     }
 
     if (priceFrom) {
