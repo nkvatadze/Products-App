@@ -1,32 +1,15 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProductListItem from "./ProductListItem";
 import { useState } from "react";
+import { get } from "../utils/localStorage";
 
-const initialProducts = [
-  {
-    id: 1,
-    product_name: "HL Road Frame - Black, 58",
-    product_number: "FR-R928-58",
-    color: "Black",
-    list_price: "900.00",
-    modified_date: "11/11/2021",
-  },
-  {
-    id: 2,
-    product_name: "HL Road Frame - Black, 59",
-    product_number: "FR-R928-59",
-    color: "Red",
-    list_price: "1200.00",
-    modified_date: "11/10/2021",
-  },
-];
 const Products = () => {
   const [filtersShown, setFiltersShown] = useState(false);
   const [search, setSearch] = useState("");
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(get("products"));
 
   const handleSearchChange = ({ target: { value } }) => {
     setSearch(value);
@@ -42,7 +25,7 @@ const Products = () => {
 
   const handleFilter = (e) => {
     e.preventDefault();
-    let newProducts = [...initialProducts];
+    let newProducts = [...products];
     if (search) {
       newProducts = newProducts.filter((p) => p.product_name.toLowerCase().includes(search.toLowerCase()));
     }
@@ -63,7 +46,7 @@ const Products = () => {
     setPriceFrom("");
     setPriceTo("");
 
-    setProducts(initialProducts);
+    setProducts(get("products"));
   };
 
   return (
@@ -71,9 +54,15 @@ const Products = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl">Products</h1>
         <div>
-          <button onClick={() => setFiltersShown(!filtersShown)} className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out delay-50 rounded-md text-white">
+          <button
+            onClick={() => setFiltersShown(!filtersShown)}
+            className="mr-5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out delay-50 rounded-md text-white"
+          >
             {filtersShown ? "Hide" : "Show"} Filters
           </button>
+          <Link className="px-3 py-2 bg-green-600 hover:bg-green-700 transition ease-in-out delay-50 rounded-md text-white" to="products/create">
+            Create Product
+          </Link>
         </div>
       </div>
       {filtersShown && (
